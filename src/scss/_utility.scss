@@ -1,0 +1,37 @@
+.width {
+    // background-color: lightcoral;
+    width: 100%;
+    max-width: 110rem;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 2rem;
+    padding-left: 2rem;
+}
+
+.flex-center {
+    justify-content: center;
+}
+
+.body-flex {
+    min-height: 100vh;
+    // background-color: aqua;
+    // background-color: #e4fafa;
+    // background-color: #f0ffff;
+    // background-color: #f3fcfc;
+    // background-color: #e3e3ff;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+}
+
+.disabled {
+    cursor: not-allowed;
+    background-color: var(--black-4);
+    // font-weight: 600;
+    font-family: "Work Sans", sans-serif;
+    font-weight: bold;
+
+    &:hover {
+        background-color: var(--black-3);
+    }
+}

@@ -1,0 +1,163 @@
+import { validateEmail } from "./validateEmail";
+
+// const validateInfo = (values) => {
+//     let { firstName, lastName, email, password, confirmPassword } = values;
+//     let errors = {};
+
+//     if (!firstName.trim()) {
+//         errors.firstName = "First name required";
+//     }
+
+//     if (!lastName.trim()) {
+//         errors.lastName = "Last name required";
+//     }
+
+//     email = email.trim();
+//     if (!email) {
+//         errors.email = "email required";
+//     } else if (!validateEmail(email)) {
+//         errors.email = "email is inavlid";
+//     }
+
+//     if (!password) {
+//         errors.password = "password required";
+//     } else if (password.length < 8) {
+//         errors.password = "Password needs to be at least 8 characters";
+//     }
+
+//     if (!confirmPassword) {
+//         errors.confirmPassword = "Please confirm password";
+//     } else if (confirmPassword !== password) {
+//         errors.confirmPassword = "Passwords do not match";
+//     }
+
+//     return errors;
+// };
+
+const validateInfo = (name, value, values) => {
+    // console.log({ name });
+    // console.log(values);
+    // console.log({ name, value, values });
+    let {
+        // firstName,
+        // lastName,
+        // userName,
+        // email,
+        password,
+        confirmPassword,
+    } = values;
+    let error = { [name]: {} };
+    // //console.log(error);
+    switch (name) {
+        case "firstName":
+            if (!value.trim()) {
+                error.firstName.msg = "Name is required";
+                error.firstName.status = true;
+            } else {
+                error.firstName.msg = "";
+                error.firstName.status = false;
+            }
+            //console.log(error);
+            return error;
+
+        case "lastName":
+            if (!value.trim()) {
+                error.lastName.msg = "Name is required";
+                error.lastName.status = true;
+            } else {
+                error.lastName.msg = "";
+                error.lastName.status = false;
+            }
+            //console.log(error);
+            return error;
+
+        case "userName":
+            if (!value.trim()) {
+                error.userName.msg = "Name is required";
+                error.userName.status = true;
+            } else {
+                error.userName.msg = "";
+                error.userName.status = false;
+            }
+            //console.log(error);
+            return error;
+
+        case "email":
+            if (!value.trim()) {
+                error.email.msg = "Email is required";
+                error.email.status = true;
+            } else if (!validateEmail(value.trim())) {
+                error.email.msg = "Invalid Email";
+                error.email.status = true;
+            } else {
+                error.email.msg = "";
+                error.email.status = false;
+            }
+            //console.log(error);
+            return error;
+
+        case "password":
+            if (!value) {
+                error.password.msg = "password is required";
+                error.password.status = true;
+            } else if (value.length < 8) {
+                error.password.msg = "password must be at least 8 characters";
+                error.password.status = true;
+            } else if (confirmPassword !== "" && value !== confirmPassword) {
+                console.log({ confirmPassword });
+                error.password.msg = "passwords do not match";
+                error.password.status = true;
+            } else if (value === confirmPassword) {
+                error.password.msg = "";
+                error.password.status = false;
+                error.confirmPassword = {
+                    msg: "",
+                    status: false,
+                };
+            }
+            // else {
+            //     error.password.msg = "";
+            //     error.password.status = false;
+
+            //     error.confirmPassword = {
+            //         msg: "",
+            //         status: false,
+            //     };
+            // }
+            //console.log(error);
+            return error;
+
+        case "confirmPassword":
+            if (!value) {
+                error.confirmPassword.msg = "Please confirm password";
+                error.confirmPassword.status = true;
+            } else if (value !== password) {
+                error.confirmPassword.msg = "Passwords do not match";
+                error.confirmPassword.status = true;
+            } else if (value === password) {
+                error.confirmPassword.msg = "";
+                error.confirmPassword.status = false;
+
+                error.password = {
+                    msg: "",
+                    status: false,
+                };
+            }
+            // else {
+            //     error.confirmPassword.msg = "";
+            //     error.confirmPassword.status = false;
+
+            //     error.password = {
+            //         msg: "",
+            //         status: false,
+            //     };
+            // }
+            //console.log(error);
+            return error;
+
+        default:
+            break;
+    }
+};
+
+export default validateInfo;

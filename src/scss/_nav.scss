@@ -1,0 +1,10 @@
+.nav {
+    padding-top: 2.8rem;
+    padding-bottom: 2.8rem;
+    @include flex(row, space-between);
+
+    &__links {
+        @include flex(row, space-between);
+        gap: 2rem;
+    }
+}

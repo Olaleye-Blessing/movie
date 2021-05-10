@@ -1,0 +1,138 @@
+:root {
+    --white: #fff;
+    --white-1: #e3e9ff;
+
+    --blue: #23f;
+    --blue-1: #5863fc;
+    --blue-2: #bfc2f7;
+    // 5863fc
+
+    --black: #111;
+    --black-1: #333;
+    --black-2: #d4d3d3;
+    --black-3: #d3d0d0;
+    --black-4: #bbb;
+
+    --coral-1: #f07f56;
+    --coral-2: #fc9671;
+
+    --border-7: 0.7rem;
+}
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+* {
+    &,
+    &::after,
+    &::before {
+        box-sizing: inherit;
+        margin: 0;
+        padding: 0;
+    }
+
+    &:focus {
+        outline: 0.2rem solid var(--blue-1);
+    }
+}
+
+body {
+    font-size: 1.8rem;
+    line-height: 1.5;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 300;
+    color: var(--black);
+    background-color: #e3e3ff;
+    padding-bottom: 10rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    font-family: "Crimson Text", serif;
+    // margin-top: 2rem;
+    // margin-bottom: 2rem;
+    padding-top: 1.8rem;
+    padding-bottom: 1.8rem;
+    text-align: center;
+}
+
+a {
+    font-family: "Alegreya", serif;
+    text-decoration: none;
+
+    &:link,
+    &:visited {
+        color: var(--black-1);
+    }
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+ul {
+    list-style: none;
+}
+
+img,
+svg {
+    max-width: 100%;
+}
+
+.homeLogo {
+    font-size: 3rem;
+    color: var(--white);
+    position: relative;
+    display: inline-block;
+    padding: 1rem 1.5rem;
+    transition: all 0.25s ease-in-out;
+
+    &:focus,
+    &:hover,
+    &:active {
+        text-decoration: none;
+    }
+
+    &__svg {
+        width: 2.5rem;
+        height: 2.5rem;
+        color: var(--blue);
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    h1 {
+        font-size: 3rem;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+// @media only screen and (min-width: 600px) {...}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    h1 {
+        font-size: 4rem;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+// @media only screen and (min-width: 992px) {...}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    h1 {
+        font-size: 4.5rem;
+    }
+}

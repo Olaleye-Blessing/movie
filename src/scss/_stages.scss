@@ -1,0 +1,54 @@
+.stages {
+    padding: 1.2rem 0 1.2rem;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 50rem;
+    max-width: 44rem;
+    border-radius: 1.2rem;
+    @include flex(row, center);
+    gap: 2rem;
+}
+
+.stage {
+    &__box {
+        @include flex(row, center);
+    }
+
+    &__check {
+        padding: 0.6rem 1.5rem;
+        margin-right: 0.7rem;
+        position: relative;
+        background-color: var(--white-1);
+        color: var(--black-1);
+        font-weight: bold;
+
+        &.active {
+            color: var(--white);
+            background-color: var(--blue-1);
+            font-weight: normal;
+        }
+        &.checked {
+            position: relative;
+            &::before {
+                content: "✔";
+                color: var(--blue);
+                background-color: var(--blue-2);
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                @include flex(row, center);
+                border-radius: var(--border-7);
+            }
+        }
+    }
+    &__name {
+        font-size: 2rem;
+        &.checked {
+            font-weight: bold;
+        }
+    }
+}
