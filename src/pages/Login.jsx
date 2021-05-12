@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 // import FormButton from "../Components/Form/FormButton";
 import HomeLogoLink from "../Components/HomeLogoLink";
 import FormInput from "./../Components/Form/FormInput";
@@ -9,8 +9,6 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
     const [pswdType, setPswdType] = useState("password");
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
     const [values, setValues] = useState({
         "email": "",
         password: "",
@@ -42,12 +40,17 @@ const Login = () => {
             currentErrors.password = values.password.length < 1;
         }
 
-        console.log(currentErrors);
+        // console.log(currentErrors);
         setErrors(currentErrors);
     };
 
     let disabled = Object.keys(errors).some((err) => errors[err] === true);
-    console.log({ disabled });
+    // console.log({ disabled });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("submited");
+    };
 
     return (
         <>
@@ -57,7 +60,7 @@ const Login = () => {
                 </h1>
             </header>
             <main className="width">
-                <form className="form">
+                <form className="form" onSubmit={handleSubmit}>
                     <h2>Sign In</h2>
                     <FormInput
                         label="email"
@@ -67,7 +70,9 @@ const Login = () => {
                         value={values.email}
                         handleChange={handleChange}
                         required={true}
-                        handleKeyDown={() => validate("email")}
+                        handleKeyDown={() => {
+                            validate("email");
+                        }}
                     />
                     <FormInput
                         label="pasword"

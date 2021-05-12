@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 
 const FormInput = ({
@@ -46,6 +45,8 @@ FormInput.defaultProps = {
     placeholder: "",
     type: "text",
     errorClass: "",
+    required: false,
+    ref: null,
 };
 
 export default FormInput;
