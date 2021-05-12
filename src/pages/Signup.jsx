@@ -1,13 +1,16 @@
-import React, { useState } from "react";
-import FormButton from "../Components/Form/FormButton";
+import { useState } from "react";
+// import FormButton from "../Components/Form/FormButton";
 import HomeLogoLink from "../Components/HomeLogoLink";
-import FormInput from "./../Components/Form/FormInput";
-import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
+// import FormInput from "./../Components/Form/FormInput";
+// import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import FormBtn from "../Components/Form/FormBtn";
 import useSignUpForm from "../hooks/useSignUpForm";
 import validateInfo from "../utility/validateFormInfo";
-import DefaultFormInput from "../Components/Form/DefaultFormInput";
+// import DefaultFormInput from "../Components/Form/DefaultFormInput";
 import sliceObject from "../utility/sliceObjects";
+import SignupPersonalInfo from "../Components/Form/SignupPersonalInfo";
+import SignUpAccountInfo from "../Components/Form/SignUpAccountInfo";
+import ConfirmPage from "../Components/Form/ConfirmPage";
 
 const SignUp = () => {
     const [stages, setStages] = useState([
@@ -49,20 +52,6 @@ const SignUp = () => {
         return hasError ? "invalid" : "valid";
     };
 
-    // console.log(errors);
-
-    const [passwordType, setPasswordType] = useState({
-        password: "password",
-        confirmPassword: "password",
-    });
-
-    const togglePswdType = (name) => {
-        let currenType = { ...passwordType };
-        currenType[name] =
-            currenType[name] === "password" ? "text" : "password";
-        setPasswordType(currenType);
-    };
-
     let stageOne = sliceObject(0, 3, errors);
     let stageTwo = sliceObject(3, 6, errors);
 
@@ -73,170 +62,54 @@ const SignUp = () => {
     let disbleStageTwo = stageTwo
         .map((name) => errors[name])
         .some((obj) => obj.status === true);
-    // console.log(disbleStageTwo);
 
     let element;
+
+    let confirmation = [
+        { label: "first name", name: "firstname", value: values.firstName },
+        { label: "last name", name: "lastname", value: values.lastName },
+        { label: "email", name: "email", value: values.email },
+        { label: "user name", name: "username", value: values.userName },
+    ];
 
     const displayItem = () => {
         switch (currentStage) {
             case 1:
                 element = (
-                    <>
-                        <FormInput
-                            errorClass={fieldError("firstName")}
-                            handleKeyDown={() => handleKeyDown("firstName")}
-                            handleChange={handleChange}
-                            value={values.firstName}
-                            label="first name"
-                            name="firstName"
-                            placeholder="Blessing"
-                            required={true}
-                        />
-
-                        <FormInput
-                            errorClass={fieldError("lastName")}
-                            handleKeyDown={() => handleKeyDown("lastName")}
-                            value={values.lastName}
-                            handleChange={handleChange}
-                            label="last name"
-                            name="lastName"
-                            placeholder="Olaleye"
-                            required={true}
-                        />
-                        <FormInput
-                            errorClass={fieldError("email")}
-                            handleKeyDown={() => handleKeyDown("email")}
-                            value={values.email}
-                            handleChange={handleChange}
-                            label="email"
-                            name="email"
-                            placeholder="Olaleye@gmail.com"
-                            required={true}
-                        />
-                        <FormButton
-                            type="button"
-                            disabled={disbleStageOne}
-                            text="next"
-                            next={true}
-                            handleClick={() => {
-                                setCurrentStage(currentStage + 1);
-                                handleStageChange("personal", 1);
-                            }}
-                        />
-                    </>
+                    <SignupPersonalInfo
+                        values={values}
+                        fieldError={fieldError}
+                        handleChange={handleChange}
+                        handleKeyDown={handleKeyDown}
+                        errors={errors}
+                        disbleStageOne={disbleStageOne}
+                        setCurrentStage={setCurrentStage}
+                        handleStageChange={handleStageChange}
+                        currentStage={currentStage}
+                    />
                 );
                 break;
 
             case 2:
                 element = (
-                    <>
-                        <FormInput
-                            errorClass={fieldError("userName")}
-                            handleKeyDown={() => handleKeyDown("userName")}
-                            handleChange={handleChange}
-                            value={values.userName}
-                            label="user name"
-                            name="userName"
-                            placeholder="Bikky"
-                            required={true}
-                        />
-                        <FormInput
-                            errorClass={fieldError("password")}
-                            handleKeyDown={() => handleKeyDown("password")}
-                            label="pasword"
-                            name="password"
-                            type={passwordType.password}
-                            value={values.password}
-                            handleChange={handleChange}
-                        >
-                            <button
-                                type="button"
-                                onClick={() => togglePswdType("password")}
-                                className="form__icon"
-                            >
-                                {passwordType.password === "password" ? (
-                                    <BsEyeFill />
-                                ) : (
-                                    <BsEyeSlashFill />
-                                )}
-                            </button>
-                        </FormInput>
-                        <FormInput
-                            errorClass={fieldError("confirmPassword")}
-                            handleKeyDown={() =>
-                                handleKeyDown("confirmPassword")
-                            }
-                            label="confirm password"
-                            name="confirmPassword"
-                            type={passwordType.confirmPassword}
-                            value={values.confirmPassword}
-                            handleChange={handleChange}
-                        >
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    togglePswdType("confirmPassword")
-                                }
-                                className="form__icon"
-                            >
-                                {passwordType.confirmPassword === "password" ? (
-                                    <BsEyeFill />
-                                ) : (
-                                    <BsEyeSlashFill />
-                                )}
-                            </button>
-                        </FormInput>
-                        <div className="form__control form__button-container">
-                            <FormBtn
-                                className={`form__button`}
-                                type="button"
-                                next={false}
-                                text="back"
-                                disabled={false}
-                                handleClick={() => {
-                                    setCurrentStage(currentStage - 1);
-                                    handleStageChange("personal", -1);
-                                }}
-                            />
-                            <FormBtn
-                                className={`form__button`}
-                                type="button"
-                                next={true}
-                                text="next"
-                                disabled={disbleStageTwo}
-                                handleClick={() => {
-                                    setCurrentStage(currentStage + 1);
-                                    handleStageChange("account", 1);
-                                }}
-                            />
-                        </div>
-                    </>
+                    <SignUpAccountInfo
+                        fieldError={fieldError}
+                        handleKeyDown={handleKeyDown}
+                        handleChange={handleChange}
+                        values={values}
+                        errors={errors}
+                        setCurrentStage={setCurrentStage}
+                        currentStage={currentStage}
+                        handleStageChange={handleStageChange}
+                        disbleStageTwo={disbleStageTwo}
+                    />
                 );
                 break;
 
             case 3:
                 element = (
-                    <>
-                        <DefaultFormInput
-                            label="first name"
-                            value={values.firstName}
-                            name="firstname"
-                        />
-                        <DefaultFormInput
-                            label="last name"
-                            value={values.lastName}
-                            name="lastname"
-                        />
-                        <DefaultFormInput
-                            label="email"
-                            value={values.email}
-                            name="email"
-                        />
-                        <DefaultFormInput
-                            label="user name"
-                            value={values.userName}
-                            name="username"
-                        />
+                    <section>
+                        <ConfirmPage confirm={confirmation} />
 
                         <div className="form__control form__button-container">
                             <FormBtn
@@ -260,7 +133,7 @@ const SignUp = () => {
                                 handleClick={null}
                             />
                         </div>
-                    </>
+                    </section>
                 );
                 break;
 
@@ -269,8 +142,6 @@ const SignUp = () => {
         }
         return element;
     };
-
-    // console.log(errors);
 
     return (
         <>

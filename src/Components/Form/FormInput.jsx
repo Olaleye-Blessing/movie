@@ -32,6 +32,7 @@ const FormInput = ({
                 placeholder={placeholder}
                 required={required}
             />
+            {required && <span className={`required ${errorClass}`}></span>}
             {children}
         </div>
     );

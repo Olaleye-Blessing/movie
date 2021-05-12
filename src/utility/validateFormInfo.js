@@ -1,4 +1,5 @@
 import { validateEmail } from "./validateEmail";
+import { validatePassword } from "./validatePassword";
 
 // const validateInfo = (values) => {
 //     let { firstName, lastName, email, password, confirmPassword } = values;
@@ -51,7 +52,7 @@ const validateInfo = (name, value, values) => {
     switch (name) {
         case "firstName":
             if (!value.trim()) {
-                error.firstName.msg = "Name is required";
+                error.firstName.msg = "";
                 error.firstName.status = true;
             } else {
                 error.firstName.msg = "";
@@ -62,7 +63,7 @@ const validateInfo = (name, value, values) => {
 
         case "lastName":
             if (!value.trim()) {
-                error.lastName.msg = "Name is required";
+                error.lastName.msg = "";
                 error.lastName.status = true;
             } else {
                 error.lastName.msg = "";
@@ -73,7 +74,10 @@ const validateInfo = (name, value, values) => {
 
         case "userName":
             if (!value.trim()) {
-                error.userName.msg = "Name is required";
+                error.userName.msg = "";
+                error.userName.status = true;
+            } else if (value.trim().length < 4) {
+                error.userName.msg = "minimum of 4 characters required";
                 error.userName.status = true;
             } else {
                 error.userName.msg = "";
@@ -84,7 +88,7 @@ const validateInfo = (name, value, values) => {
 
         case "email":
             if (!value.trim()) {
-                error.email.msg = "Email is required";
+                error.email.msg = "";
                 error.email.status = true;
             } else if (!validateEmail(value.trim())) {
                 error.email.msg = "Invalid Email";
@@ -100,8 +104,9 @@ const validateInfo = (name, value, values) => {
             if (!value) {
                 error.password.msg = "password is required";
                 error.password.status = true;
-            } else if (value.length < 8) {
-                error.password.msg = "password must be at least 8 characters";
+            } else if (!validatePassword(value)) {
+                // error.password.msg = "password must be at least 8 characters";
+                error.password.msg = "invalid password";
                 error.password.status = true;
             } else if (confirmPassword !== "" && value !== confirmPassword) {
                 console.log({ confirmPassword });

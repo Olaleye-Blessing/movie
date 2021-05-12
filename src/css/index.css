@@ -248,7 +248,7 @@ svg {
 }
 
 .form__control {
-  margin-bottom: 3rem;
+  margin-bottom: 3.4rem;
   position: relative;
 }
 
@@ -258,7 +258,7 @@ svg {
   border: none;
   outline: none;
   position: absolute;
-  top: 78%;
+  top: 5.7rem;
   right: 0;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
@@ -269,7 +269,7 @@ svg {
   height: 2rem;
 }
 
-.form__input, .form__label, .form__button {
+.form__input, .form__label, .form__select, .form__button {
   border: 0.1rem solid transparent;
   outline: none;
   display: block;
@@ -280,46 +280,52 @@ svg {
   font-weight: 300;
 }
 
-.form__input, .form__button {
+.form__input, .form__select, .form__button {
   padding: 0.6rem 2rem 0.6rem 1.1rem;
   -webkit-transition: color 0.3s linear, background 0.3s ease-in-out;
   transition: color 0.3s linear, background 0.3s ease-in-out;
+  -webkit-box-shadow: inset 0.1rem 0.1rem 0.3rem #ccc;
+          box-shadow: inset 0.1rem 0.1rem 0.3rem #ccc;
+  border-radius: 0.5rem;
 }
 
-.form__input.valid {
+.form__input.valid, .form__select.valid {
   border-color: green;
 }
 
-.form__input.invalid {
+.form__input.invalid, .form__select.invalid {
   border-color: red;
 }
 
-.form__input:disabled {
+.form__input:disabled, .form__select:disabled {
   background-color: var(--black-2);
   color: var(--black);
   border-color: var(--coral-1);
   border-color: var(--blue-1);
   font-family: "Work Sans", sans-serif;
   font-weight: bold;
+  background-color: var(--white-1);
 }
 
-.form__input:hover {
+.form__input:disabled:hover, .form__select:disabled:hover {
+  background-color: var(--white-1);
+}
+
+.form__input:hover, .form__select:hover {
   background-color: var(--black-2);
 }
 
 .form__label {
   padding: 0.1rem 0rem 0.1rem 0.2rem;
   text-transform: capitalize;
-}
-
-.form__input, .form__select, .form__button {
-  -webkit-box-shadow: inset 0.1rem 0.1rem 0.3rem #ccc;
-          box-shadow: inset 0.1rem 0.1rem 0.3rem #ccc;
-  border-radius: 0.5rem;
-}
-
-.form__label {
   margin-bottom: 0.4rem;
+}
+
+.form__select {
+  -moz-appearance: none;
+       appearance: none;
+  -webkit-appearance: none;
+  padding: 0.9rem 0.2rem 0.9rem 1.1rem;
 }
 
 .form__button {
@@ -357,6 +363,86 @@ svg {
 
 .form__button[type="button"]:hover {
   background-color: var(--black-2);
+}
+
+.form small {
+  padding: 0.1rem 0rem 0.1rem 0.2rem;
+  font-size: 1.3rem;
+  font-family: "Work Sans", sans-serif;
+  display: block;
+  font-weight: bold;
+  color: red;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.form option {
+  font-family: inherit;
+  font-size: 100%;
+  font-family: "Alegreya", serif;
+  font-weight: 300;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper:after {
+  content: "^";
+  font-size: 2rem;
+  position: absolute;
+  top: 0.6rem;
+  right: 1rem;
+}
+
+.conditions {
+  font-family: "Alegreya", serif;
+  font-family: "Work Sans", sans-serif;
+  font-family: inherit;
+  font-size: 1.2rem;
+  padding-top: 1rem;
+}
+
+.condition {
+  -webkit-transition: color 0.2s linear;
+  transition: color 0.2s linear;
+  font-weight: bold;
+  color: var(--black-1);
+  color: red;
+}
+
+.condition-valid {
+  color: green;
+}
+
+.required.invalid {
+  color: red;
+}
+
+.required::after {
+  -webkit-transition: color 0.2s linear;
+  transition: color 0.2s linear;
+  font-size: 1.1rem;
+  font-weight: bold;
+  position: absolute;
+  content: "required";
+  background-color: var(--white-1);
+  padding: 0.5rem;
+  top: 1.5rem;
+  right: -2.4rem;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 .box {
