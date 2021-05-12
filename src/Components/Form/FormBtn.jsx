@@ -1,8 +1,8 @@
-const FormBtn = ({ type, disabled, next, text, handleClick }) => {
+const FormBtn = ({ type, disabled, next, text, handleClick, className }) => {
     return (
         <button
             type={type}
-            className={`form__button ${disabled && "disabled"} ${
+            className={`form__button ${className} ${disabled && "disabled"} ${
                 next && "form__button-next"
             }`}
             disabled={disabled}
@@ -11,6 +11,10 @@ const FormBtn = ({ type, disabled, next, text, handleClick }) => {
             {text}
         </button>
     );
+};
+
+FormBtn.defaultProps = {
+    className: "",
 };
 
 export default FormBtn;

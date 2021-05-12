@@ -11,6 +11,7 @@ import sliceObject from "../utility/sliceObjects";
 import SignupPersonalInfo from "../Components/Form/SignupPersonalInfo";
 import SignUpAccountInfo from "../Components/Form/SignUpAccountInfo";
 import ConfirmPage from "../Components/Form/ConfirmPage";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
     const [stages, setStages] = useState([
@@ -72,7 +73,7 @@ const SignUp = () => {
         { label: "user name", name: "username", value: values.userName },
     ];
 
-    const displayItem = () => {
+    const displaySignUpSection = () => {
         switch (currentStage) {
             case 1:
                 element = (
@@ -125,7 +126,7 @@ const SignUp = () => {
                             />
 
                             <FormBtn
-                                className={`form__button`}
+                                className="submit"
                                 type="submit"
                                 next={false}
                                 text="submit"
@@ -170,9 +171,15 @@ const SignUp = () => {
                     })}
                 </section>
                 <form className="form" onSubmit={handleSubmit}>
-                    <h2>Sign Up</h2>
-                    {displayItem()}
+                    <h2>Create An Account</h2>
+                    {displaySignUpSection()}
                 </form>
+                <div className="form__other">
+                    Already have an account?
+                    <span>
+                        <Link to="/login">login</Link>
+                    </span>
+                </div>
             </main>
         </>
     );

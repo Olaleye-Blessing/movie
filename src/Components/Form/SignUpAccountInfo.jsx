@@ -149,7 +149,7 @@ const SignUpAccountInfo = ({
                     }}
                 />
                 <FormBtn
-                    className={`form__button`}
+                    className={disbleStageTwo ? "" : "submit"}
                     type="button"
                     next={true}
                     text="next"

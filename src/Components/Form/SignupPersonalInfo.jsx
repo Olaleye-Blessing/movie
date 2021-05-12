@@ -57,6 +57,7 @@ const SignupPersonalInfo = ({
             {/* <FormSelectInput /> */}
             <div className="form__control form__button-container">
                 <FormBtn
+                    className={disbleStageOne ? "" : "submit"}
                     type="button"
                     disabled={disbleStageOne}
                     text="next"
