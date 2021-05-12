@@ -107,6 +107,9 @@ svg {
   h1 {
     font-size: 3rem;
   }
+  .homeLogo {
+    font-size: 2.5rem;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -158,6 +161,18 @@ svg {
       -ms-flex-pack: justify;
           justify-content: space-between;
   gap: 2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .nav__links {
+    gap: 0;
+  }
+  .nav__links li {
+    margin-right: 1rem;
+  }
+  .nav__links li:last-child {
+    margin-right: 0;
+  }
 }
 
 .btn {
