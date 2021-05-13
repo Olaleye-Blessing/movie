@@ -1,6 +1,6 @@
 import FormBtn from "./FormBtn";
 import FormInput from "./FormInput";
-// import FormSelectInput from "./FormSelectInput";
+import FormSelectInput from "./FormSelectInput";
 
 const SignupPersonalInfo = ({
     values,
@@ -12,8 +12,9 @@ const SignupPersonalInfo = ({
     setCurrentStage,
     handleStageChange,
     currentStage,
+    options,
 }) => {
-    let { firstName, lastName, email } = errors;
+    let { firstName, lastName, email, country } = errors;
 
     return (
         <section>
@@ -54,7 +55,18 @@ const SignupPersonalInfo = ({
             >
                 {email.msg && <small>{email.msg}</small>}
             </FormInput>
-            {/* <FormSelectInput /> */}
+            <FormSelectInput
+                options={options}
+                label="country"
+                value={values.country}
+                handleChange={handleChange}
+                name="country"
+                required={true}
+                errorClass={fieldError("country")}
+                handleKeyDown={handleKeyDown}
+            >
+                {country.msg && <small>{country.msg}</small>}
+            </FormSelectInput>
             <div className="form__control form__button-container">
                 <FormBtn
                     className={disbleStageOne ? "" : "submit"}

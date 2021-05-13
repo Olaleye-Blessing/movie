@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import FormInput from "../Components/Form/FormInput";
 import HomeLogoLink from "../Components/HomeLogoLink";
 import { validateEmail } from "../utility/validateEmail";
 
 const ResetPassword = () => {
     const [email, setEmail] = useState("");
+    let history = useHistory();
+    console.log({ history });
 
     const handleChange = (e) => {
         setEmail(e.target.value);
@@ -13,7 +15,10 @@ const ResetPassword = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("submited");
+        console.log("rest submited");
+        setEmail("");
+        alert("reset submitted...");
+        history.replace("/");
     };
 
     return (
@@ -37,7 +42,7 @@ const ResetPassword = () => {
                 />
             </form>
             <p className="form__other">
-                Don't have an account? <Link to="/signup">signup</Link>
+                Don't have an account? <Link to="/signup">Signup</Link>
             </p>
             <p className="form__other" style={{ marginTop: "5px" }}>
                 Remember password?

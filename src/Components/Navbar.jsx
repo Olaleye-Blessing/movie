@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import HomeLogoLink from "./HomeLogoLink";
 
 const Navbar = () => {
-    console.log(React.version);
+    // console.log(React.version);
     return (
         <nav>
             <div className="width nav">

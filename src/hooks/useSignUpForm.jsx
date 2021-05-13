@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useHistory } from "react-router";
 
 const useSignUpForm = (validate) => {
+    let history = useHistory();
     const [values, setValues] = useState({
         firstName: "",
         lastName: "",
@@ -8,6 +10,7 @@ const useSignUpForm = (validate) => {
         userName: "",
         password: "",
         confirmPassword: "",
+        country: "",
     });
 
     // const [errors, setErrors] = useState({});
@@ -15,6 +18,7 @@ const useSignUpForm = (validate) => {
         firstName: { msg: "", status: true },
         lastName: { msg: "", status: true },
         email: { msg: "", status: true },
+        country: { msg: "", status: true },
         userName: { msg: "", status: true },
         password: { msg: "", status: true },
         confirmPassword: { msg: "", status: true },
@@ -40,6 +44,7 @@ const useSignUpForm = (validate) => {
         firstName: false,
         lastName: false,
         email: false,
+        country: false,
         userName: false,
         password: false,
         confirmPassword: false,
@@ -53,6 +58,17 @@ const useSignUpForm = (validate) => {
         e.preventDefault();
         // setErrors(validate(values));
         console.log("submited");
+        alert("submited");
+        setValues({
+            firstName: "",
+            lastName: "",
+            email: "",
+            userName: "",
+            password: "",
+            confirmPassword: "",
+            country: "",
+        });
+        history.replace("/");
     };
 
     return {

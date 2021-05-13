@@ -160,6 +160,16 @@ const validateInfo = (name, value, values) => {
             //console.log(error);
             return error;
 
+        case "country":
+            if (value === "select options") {
+                error.country.msg = "Please select your country";
+                error.country.status = true;
+            } else {
+                error.country.msg = "";
+                error.country.status = false;
+            }
+            return error;
+
         default:
             break;
     }

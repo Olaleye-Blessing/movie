@@ -12,6 +12,7 @@ import SignupPersonalInfo from "../Components/Form/SignupPersonalInfo";
 import SignUpAccountInfo from "../Components/Form/SignUpAccountInfo";
 import ConfirmPage from "../Components/Form/ConfirmPage";
 import { Link } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
 
 const SignUp = () => {
     const [stages, setStages] = useState([
@@ -44,6 +45,20 @@ const SignUp = () => {
         handleKeyDown,
     } = useSignUpForm(validateInfo);
 
+    const {
+        data: countries,
+        // error,
+        // pending,
+    } = useFetch("https://restcountries.eu/rest/v2/all");
+
+    // console.log(countries);
+
+    let countriesName = countries.map((country) => {
+        let { name: text, alpha3Code: value } = country;
+        return { text, value };
+    });
+    // console.log(countriesName);
+
     const fieldError = (field) => {
         const hasError = errors[field].status;
         const shouldShow = touched[field];
@@ -53,8 +68,8 @@ const SignUp = () => {
         return hasError ? "invalid" : "valid";
     };
 
-    let stageOne = sliceObject(0, 3, errors);
-    let stageTwo = sliceObject(3, 6, errors);
+    let stageOne = sliceObject(0, 4, errors);
+    let stageTwo = sliceObject(4, 6, errors);
 
     let disbleStageOne = stageOne
         .map((name) => errors[name])
@@ -71,6 +86,7 @@ const SignUp = () => {
         { label: "last name", name: "lastname", value: values.lastName },
         { label: "email", name: "email", value: values.email },
         { label: "user name", name: "username", value: values.userName },
+        { label: "country", name: "country", value: values.country },
     ];
 
     const displaySignUpSection = () => {
@@ -87,6 +103,10 @@ const SignUp = () => {
                         setCurrentStage={setCurrentStage}
                         handleStageChange={handleStageChange}
                         currentStage={currentStage}
+                        options={[
+                            { text: "select options", value: "default" },
+                            ...countriesName,
+                        ]}
                     />
                 );
                 break;
@@ -177,9 +197,12 @@ const SignUp = () => {
                 <div className="form__other">
                     Already have an account?
                     <span>
-                        <Link to="/login">login</Link>
+                        <Link to="/login">Login</Link>
                     </span>
                 </div>
+                <p className="form__other" style={{ marginTop: "5px" }}>
+                    <Link to="/resetpassword">Forgot password?</Link>
+                </p>
             </main>
         </>
     );

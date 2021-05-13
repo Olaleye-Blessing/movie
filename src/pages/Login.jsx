@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import FormButton from "../Components/Form/FormButton";
 import HomeLogoLink from "../Components/HomeLogoLink";
 import FormInput from "./../Components/Form/FormInput";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { validateEmail } from "../utility/validateEmail";
 import FormBtn from "../Components/Form/FormBtn";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Login = () => {
     const [pswdType, setPswdType] = useState("password");
@@ -18,6 +18,8 @@ const Login = () => {
         password: true,
     });
 
+    let history = useHistory();
+
     const handleChange = (e) => {
         let { name, value } = e.target;
         setValues({ ...values, [name]: value });
@@ -29,20 +31,23 @@ const Login = () => {
 
     const validate = (name) => {
         let currentErrors = { ...errors };
-        // console.log(currentErrors);
 
         if (name === "email") {
-            currentErrors.email = validateEmail(values.email);
+            currentErrors.email = !validateEmail(values.email);
         }
 
         if (name === "password") {
-            // console.log(values.password);
             currentErrors.password = values.password.length < 1;
         }
 
-        // console.log(currentErrors);
         setErrors(currentErrors);
     };
+
+    useEffect(() => {
+        validate("email");
+        validate("password");
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [values.password, values.email]);
 
     let disabled = Object.keys(errors).some((err) => errors[err] === true);
     // console.log({ disabled });
@@ -50,6 +55,9 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("submited");
+        alert("submitted");
+        setValues({ ...values, "email": "", password: "" });
+        history.replace("/");
     };
 
     return (
@@ -75,7 +83,7 @@ const Login = () => {
                         }}
                     />
                     <FormInput
-                        label="pasword"
+                        label="password"
                         name="password"
                         type={pswdType}
                         value={values.password}
@@ -105,7 +113,7 @@ const Login = () => {
                     </div>
                 </form>
                 <p className="form__other">
-                    Don't have an account? <Link to="/signup">signup</Link>
+                    Don't have an account? <Link to="/signup">Signup</Link>
                 </p>
                 <p className="form__other" style={{ marginTop: "5px" }}>
                     <Link to="/resetpassword">Forgot password?</Link>
