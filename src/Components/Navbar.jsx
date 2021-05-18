@@ -5,13 +5,21 @@ import { BiSearchAlt } from "react-icons/bi";
 import HomeLogoLink from "./HomeLogoLink";
 
 const Navbar = () => {
-    const [navItems, setNavItems] = useState([
+    // const [navItems, setNavItems] = useState([
+    //     { path: "/movies", label: "movies", active: false },
+    //     { path: "/tvshows", label: "tvshows", active: false },
+    //     { path: "/people", label: "people", active: false },
+    //     { path: "/login", label: "login", active: false },
+    //     { path: "/signup", label: "signup", active: false },
+    // ]);
+
+    let navItems = [
         { path: "/movies", label: "movies", active: false },
         { path: "/tvshows", label: "tvshows", active: false },
         { path: "/people", label: "people", active: false },
         { path: "/login", label: "login", active: false },
         { path: "/signup", label: "signup", active: false },
-    ]);
+    ];
 
     const navLinksRef = useRef(null);
     const navLinksContRef = useRef(null);
@@ -21,7 +29,7 @@ const Navbar = () => {
 
     const searchRef = useRef(null);
     const searchCont = useRef(null);
-    const [showSearch, setShowSearch] = useState(false);
+    // const [showSearch, setShowSearch] = useState(false);
 
     const toggleNav = () => {
         navToggleRef.current.classList.toggle("change");
@@ -51,7 +59,7 @@ const Navbar = () => {
                 <div ref={navLinksContRef} className="nav__links-container">
                     <ul ref={navLinksRef} className="nav__links">
                         {navItems.map((item, i) => {
-                            let { path, label, active } = item;
+                            let { path, label } = item;
                             return (
                                 <li
                                     className={`nav__link ${
