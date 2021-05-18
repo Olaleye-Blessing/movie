@@ -56,7 +56,9 @@ const Navbar = () => {
     }, [showLinks]);
 
     if (pathname !== "/search") {
-        searchCont.current.classList.remove("change");
+        if (searchCont.current != null) {
+            searchCont.current.classList.remove("change");
+        }
     }
     const handleSubmit = (e) => {
         e.preventDefault();
