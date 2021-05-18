@@ -42,6 +42,7 @@ To Visit App(live):
 ## Coming Features
 
 <ul>
+<li>search for movies, tvshows and/or people
 <li>Authentication
 <li>Movies/tvshows trailer
 <li>Media details
