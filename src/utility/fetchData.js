@@ -5,7 +5,8 @@ const fetchData = async (url, signal) => {
         let data = await req.json();
         return { status: "success", data };
     } catch (error) {
-        return { status: "fail", message: error.message, name: error.name };
+        if (error.name !== "AbortError")
+            return { status: "fail", message: error.message, name: error.name };
     }
 };
 
