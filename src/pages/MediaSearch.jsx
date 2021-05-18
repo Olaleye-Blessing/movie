@@ -20,6 +20,10 @@ const MediaSearch = () => {
 
     let { data: allMedia, loading, error } = useInfiniteScrolling(pathUrl);
 
+    if (!searchQuery) {
+        error = "";
+    }
+
     return (
         <section className="width">
             <section className="width" data-sec="media">

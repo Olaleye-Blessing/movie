@@ -49,6 +49,7 @@ const useInfiniteScrolling = (pathUrl) => {
                 }
                 if (fetchedData.status === "fail") {
                     console.log("then fail ....");
+                    setLoading(false);
                     setError(fetchedData.message);
                 }
             })
