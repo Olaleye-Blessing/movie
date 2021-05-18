@@ -27,9 +27,9 @@ const useInfiniteScrolling = (pathUrl) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    let abortFetch = new AbortController();
+    let signal = abortFetch.signal;
     useEffect(() => {
-        let abortFetch = new AbortController();
-        let signal = abortFetch.signal;
         setLoading(true);
         if (page > totalPages) {
             setLoading(false);
@@ -56,7 +56,12 @@ const useInfiniteScrolling = (pathUrl) => {
             });
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [page]);
+    }, [page, pathUrl]);
+
+    useEffect(() => {
+        setData([]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pathUrl]);
 
     return { data, loading, error };
 };

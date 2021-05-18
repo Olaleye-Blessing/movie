@@ -13,6 +13,8 @@ import ResetPassword from "./pages/ResetPassword";
 import Movies from "./pages/Movies";
 import People from "./pages/People";
 import TvShows from "./pages/TvShows";
+import Movie from "./pages/Movie";
+import MediaSearch from "./pages/MediaSearch";
 
 const App = () => {
     let { pathname } = useLocation();
@@ -35,6 +37,9 @@ const App = () => {
                 <Route path="/forgotpassword">
                     <ResetPassword />
                 </Route>
+                <Route path="/movies/:id">
+                    <Movie />
+                </Route>
                 <Route path="/movies">
                     <Movies />
                 </Route>
@@ -43,6 +48,9 @@ const App = () => {
                 </Route>
                 <Route path="/tvshows">
                     <TvShows />
+                </Route>
+                <Route path="/search">
+                    <MediaSearch />
                 </Route>
             </Switch>
         </>

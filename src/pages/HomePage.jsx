@@ -18,7 +18,7 @@ const Homepage = () => {
     return (
         <main className="home">
             <section className="width">
-                <section className="media width">
+                <section className="width" data-sec="media">
                     {allMedia.length > 0 &&
                         allMedia.map((media) => {
                             let {
@@ -28,12 +28,22 @@ const Homepage = () => {
                                 name,
                                 title,
                                 media_type,
+                                popularity,
+                                vote_average,
                             } = media;
+                            let path =
+                                media_type === "person"
+                                    ? `/person/${id}`
+                                    : media_type === "tv"
+                                    ? `/tv/${id}`
+                                    : `/movies/${id}`;
                             return (
                                 <Media
                                     key={`${id}`}
                                     img={poster_path || profile_path}
                                     alt={title || name}
+                                    path={path}
+                                    rate={vote_average || popularity}
                                     type={media_type === "person" && "person"}
                                 />
                             );

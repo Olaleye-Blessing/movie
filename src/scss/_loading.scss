@@ -1,5 +1,6 @@
 .lds-cotainer {
     @include flex(row, center);
+    margin-top: 3rem;
 }
 .lds-spinner {
     color: var(--blue-1);

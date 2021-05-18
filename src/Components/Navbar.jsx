@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { BiSearchAlt } from "react-icons/bi";
 
 import HomeLogoLink from "./HomeLogoLink";
+import { useGlobalContext } from "../contexts/GlobalContext";
 
 const Navbar = () => {
     // const [navItems, setNavItems] = useState([
@@ -12,6 +13,8 @@ const Navbar = () => {
     //     { path: "/login", label: "login", active: false },
     //     { path: "/signup", label: "signup", active: false },
     // ]);
+    let history = useHistory();
+    let pathname = history.location.pathname;
 
     let navItems = [
         { path: "/movies", label: "movies", active: false },
@@ -51,6 +54,28 @@ const Navbar = () => {
             navLinksContRef.current.style.height = `0px`;
         }
     }, [showLinks]);
+
+    if (pathname !== "/search") {
+        searchCont.current.classList.remove("change");
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (pathname !== "/search") {
+            console.log("yes");
+            history.push("/search");
+        }
+    };
+
+    let { setSearchQuery } = useGlobalContext();
+
+    const handleSearchChange = (e) => {
+        if (pathname !== "/search") {
+            console.log("yes");
+            history.push("/search");
+        }
+        let { value } = e.target;
+        setSearchQuery(value);
+    };
 
     return (
         <nav>
@@ -101,8 +126,13 @@ const Navbar = () => {
                     </figure>
                 </button>
             </div>
-            <form className={`nav__form width`} ref={searchCont}>
+            <form
+                className={`nav__form width`}
+                ref={searchCont}
+                onSubmit={handleSubmit}
+            >
                 <input
+                    onChange={handleSearchChange}
                     ref={searchRef}
                     type="search"
                     name="search"

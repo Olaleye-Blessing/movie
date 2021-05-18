@@ -2,9 +2,11 @@ import LoadingIndicator from "../Components/LoadingIndicator";
 import Media from "../Components/MediaBox";
 import { useGlobalContext } from "../contexts/GlobalContext";
 import useInfiniteScrolling from "../hooks/useInfiniteScrolling";
+import useTitle from "../hooks/useTitle";
 
 const TvShows = () => {
     let { key } = useGlobalContext();
+    useTitle("Wahala || TvShow");
     let {
         data: tvshows,
         loading,
@@ -14,12 +16,19 @@ const TvShows = () => {
     );
     return (
         <>
-            <section className="media width">
+            <section className="width" data-sec="media">
                 {tvshows.length > 0 &&
                     tvshows.map((tv) => {
-                        let { id, poster_path, name } = tv;
+                        let { id, poster_path, name, vote_average } = tv;
+                        let path = `/tv/${id}`;
                         return (
-                            <Media key={`${id}`} img={poster_path} alt={name} />
+                            <Media
+                                key={`${id}`}
+                                img={poster_path}
+                                alt={name}
+                                path={path}
+                                rate={vote_average}
+                            />
                         );
                     })}
             </section>
