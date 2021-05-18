@@ -6,13 +6,8 @@ import HomeLogoLink from "./HomeLogoLink";
 import { useGlobalContext } from "../contexts/GlobalContext";
 
 const Navbar = () => {
-    // const [navItems, setNavItems] = useState([
-    //     { path: "/movies", label: "movies", active: false },
-    //     { path: "/tvshows", label: "tvshows", active: false },
-    //     { path: "/people", label: "people", active: false },
-    //     { path: "/login", label: "login", active: false },
-    //     { path: "/signup", label: "signup", active: false },
-    // ]);
+    let { setSearchQuery } = useGlobalContext();
+
     let history = useHistory();
     let pathname = history.location.pathname;
 
@@ -42,6 +37,7 @@ const Navbar = () => {
     const toggleFormCont = () => {
         console.log("yes");
         searchCont.current.classList.toggle("change");
+        searchRef.current.focus();
         // setShowSearch(!showSearch);
     };
 
@@ -55,11 +51,13 @@ const Navbar = () => {
         }
     }, [showLinks]);
 
+    //? remove search form when leaving search page for other pages
     if (pathname !== "/search") {
         if (searchCont.current != null) {
             searchCont.current.classList.remove("change");
         }
     }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (pathname !== "/search") {
@@ -67,8 +65,6 @@ const Navbar = () => {
             history.push("/search");
         }
     };
-
-    let { setSearchQuery } = useGlobalContext();
 
     const handleSearchChange = (e) => {
         if (pathname !== "/search") {

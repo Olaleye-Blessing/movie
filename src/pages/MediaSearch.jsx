@@ -15,20 +15,21 @@ import useInfiniteScrolling from "../hooks/useInfiniteScrolling";
 //     });
 const MediaSearch = () => {
     let { searchQuery, key } = useGlobalContext();
+
     let pathUrl = `https://api.themoviedb.org/3/search/multi?api_key=${key}&language=en-US&query=${searchQuery}&include_adult=true`;
-    console.log(searchQuery);
+    // console.log(searchQuery === "");
 
     let { data: allMedia, loading, error } = useInfiniteScrolling(pathUrl);
 
     if (!searchQuery) {
-        error = "";
+        return <span></span>;
     }
 
     return (
         <section className="width">
             <section className="width" data-sec="media">
                 {allMedia.length > 0 &&
-                    allMedia.map((media) => {
+                    allMedia.map((media, i) => {
                         let {
                             id,
                             poster_path,
@@ -47,7 +48,7 @@ const MediaSearch = () => {
                                 : `/movies/${id}`;
                         return (
                             <Media
-                                key={`${id}`}
+                                key={`${id}${i}`}
                                 img={poster_path || profile_path}
                                 alt={title || name}
                                 path={path}
@@ -58,7 +59,7 @@ const MediaSearch = () => {
                     })}
             </section>
             {loading && <LoadingIndicator />}
-            {error && <div>{error.message || error}</div>}
+            {error && searchQuery !== "" && <div>{error.message || error}</div>}
         </section>
     );
 };

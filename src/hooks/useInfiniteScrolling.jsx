@@ -33,6 +33,12 @@ const useInfiniteScrolling = (pathUrl) => {
     let signal = abortFetch.signal;
     useEffect(() => {
         setLoading(true);
+        setError(false);
+        if (totalPages === 0) {
+            setLoading(false);
+            setError("not found");
+            return;
+        }
         if (page > totalPages) {
             setLoading(false);
             setError("no more data");
@@ -61,11 +67,22 @@ const useInfiniteScrolling = (pathUrl) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, pathUrl]);
 
+    //! WAHALA!!
     //? set all data to empty array if the url chnages. This is particularly useful for form query
+    //? set totalPages back to 1 so that search could start all over. also peculiar to form query
     useEffect(() => {
         setData([]);
+        setTotalPages(1);
+        // setLoading(false);
+        // setError("not found");
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathUrl]);
+
+    // useEffect(() => {
+    //     setLoading(false);
+    //     setError("not found");
+
+    // }, [input])
 
     return { data, loading, error };
 };
