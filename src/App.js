@@ -10,6 +10,9 @@ import "./css/index.css";
 
 import { Switch, Route, useLocation } from "react-router-dom";
 import ResetPassword from "./pages/ResetPassword";
+import Movies from "./pages/Movies";
+import People from "./pages/People";
+import TvShows from "./pages/TvShows";
 
 const App = () => {
     let { pathname } = useLocation();
@@ -18,7 +21,7 @@ const App = () => {
         <>
             {pathname !== "/signup" &&
                 pathname !== "/login" &&
-                pathname !== "/resetpassword" && <Navbar />}
+                pathname !== "/forgotpassword" && <Navbar />}
             <Switch>
                 <Route path="/" exact>
                     <Homepage />
@@ -29,8 +32,17 @@ const App = () => {
                 <Route path="/login">
                     <Login />
                 </Route>
-                <Route path="/resetpassword">
+                <Route path="/forgotpassword">
                     <ResetPassword />
+                </Route>
+                <Route path="/movies">
+                    <Movies />
+                </Route>
+                <Route path="/people">
+                    <People />
+                </Route>
+                <Route path="/tvshows">
+                    <TvShows />
                 </Route>
             </Switch>
         </>

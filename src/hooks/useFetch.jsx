@@ -23,6 +23,8 @@ const useFetch = (url) => {
                 console.log(error.name);
                 console.log("normal error, could not fetch");
                 console.log({ message: error.message });
+                setError(error.name);
+                setIsPending(null);
             }
         }
     };

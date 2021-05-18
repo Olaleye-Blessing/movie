@@ -1,13 +1,14 @@
 .btn {
     display: inline-block;
     text-decoration: none;
-    border: 0.2rem solid;
+    // border: 0.2rem solid;
     outline: none;
     padding: 0.3rem 1.1rem 0.5rem 1.1rem;
     transition: all 0.3s ease-in-out;
     border-radius: var(--border-7);
     position: relative;
     z-index: 2;
+    background-color: transparent;
 
     &::after {
         border-radius: 0.7rem;
@@ -24,6 +25,10 @@
         z-index: -1;
     }
 
+    &-border {
+        border: 0.2rem solid;
+    }
+
     &:focus {
         color: var(--white);
         border-color: transparent;
@@ -37,6 +42,7 @@
     &:hover {
         color: var(--white);
         background-color: var(--blue-1);
+        // text-decoration: none;
     }
 
     &-link {
@@ -51,6 +57,25 @@
         color: var(--blue);
         &:hover {
             color: var(--white);
+        }
+    }
+
+    &-icon {
+        padding: 0.5rem 0.5rem 0.3rem 0;
+        outline: none;
+        transition: all 0.3s ease-in-out;
+        border: none;
+        background-color: transparent;
+        color: var(--blue);
+        position: relative;
+        z-index: 2;
+
+        &:focus {
+            outline: 0.2rem solid var(--blue-1);
+        }
+
+        &:hover {
+            color: #fff;
         }
     }
 }

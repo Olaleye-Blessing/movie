@@ -35,3 +35,18 @@
         background-color: var(--black-3);
     }
 }
+
+.mg-l-a {
+    margin-left: auto;
+    // background-color: blue !important;
+}
+
+.lone-icon {
+    font-size: 3rem;
+    @include flex(row, center);
+    display: inline-flex;
+
+    svg {
+        display: inline;
+    }
+}

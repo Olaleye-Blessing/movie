@@ -15,7 +15,7 @@ const Homepage = () => {
                         Officia ipsa qui voluptas mollitia nisi.
                     </p>
                 </header>
-                <ul className="nav__links flex-center">
+                {/* <ul className="nav__links flex-center">
                     <li>
                         <NavLink to="/login" className="btn btn-link">
                             login
@@ -29,7 +29,7 @@ const Homepage = () => {
                             sign up
                         </NavLink>
                     </li>
-                </ul>
+                </ul> */}
             </section>
         </main>
     );

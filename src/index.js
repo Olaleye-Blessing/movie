@@ -3,12 +3,15 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
+import { GlobalProvider } from "./contexts/GlobalContext";
 
 ReactDOM.render(
     <React.StrictMode>
-        <Router>
-            <App />
-        </Router>
+        <GlobalProvider>
+            <Router>
+                <App />
+            </Router>
+        </GlobalProvider>
     </React.StrictMode>,
     document.getElementById("root")
 );

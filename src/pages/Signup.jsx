@@ -201,7 +201,7 @@ const SignUp = () => {
                     </span>
                 </div>
                 <p className="form__other" style={{ marginTop: "5px" }}>
-                    <Link to="/resetpassword">Forgot password?</Link>
+                    <Link to="/forgotpassword">Forgot password?</Link>
                 </p>
             </main>
         </>
