@@ -12,7 +12,7 @@ const useInfiniteScrolling = (pathUrl) => {
     let url = `${pathUrl}&page=${page}`;
 
     const handleScroll = () => {
-        // checkScroll
+        //? increase the page number if true(if the user is 100px away from document's bottom)
         if (checkScroll()) {
             setPage((page) => page + 1);
         }
@@ -20,6 +20,8 @@ const useInfiniteScrolling = (pathUrl) => {
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
+
+        //? remove effect when component unmounts
         return () => {
             console.log("remove scrolling function(unmount)...");
             window.removeEventListener("scroll", handleScroll);
@@ -58,6 +60,7 @@ const useInfiniteScrolling = (pathUrl) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, pathUrl]);
 
+    //? set all data to empty array if the url chnages. This is particularly useful for form query
     useEffect(() => {
         setData([]);
         // eslint-disable-next-line react-hooks/exhaustive-deps

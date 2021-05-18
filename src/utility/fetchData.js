@@ -1,3 +1,4 @@
+//? I dont know why I pass in signal here but it works. DON't TOUCH!!
 const fetchData = async (url, signal) => {
     try {
         let req = await fetch(url, { signal });
