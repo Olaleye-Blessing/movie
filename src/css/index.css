@@ -2,6 +2,7 @@
 :root {
   --white: #fff;
   --white-1: #e3e9ff;
+  --white-2: rgba(248, 248, 248, 0.932);
   --blue: #23f;
   --blue-1: #5863fc;
   --blue-2: #bfc2f7;
@@ -149,6 +150,63 @@ svg {
   position: relative;
 }
 
+.nav__auth {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  gap: 0rem;
+}
+
+.nav__main {
+  background-color: var(--blue-2);
+  width: 100%;
+  max-width: 60rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  padding-top: 0.6rem;
+  padding-bottom: 0.4rem;
+}
+
+.nav__main-links {
+  position: fixed;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  left: 0;
+}
+
 .nav__links {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -177,6 +235,15 @@ svg {
 .nav__link {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  font-size: 2.5rem;
+}
+
+.nav__link-icon {
+  display: inline-block;
+  vertical-align: -0.4rem;
+  margin-right: 0.6rem;
 }
 
 .nav__search {
@@ -188,10 +255,14 @@ svg {
 }
 
 .nav__form {
+  position: absolute;
+  left: 0;
+  right: 0;
   height: 0;
   overflow: hidden;
   -webkit-transition: height 0.25s ease-in-out;
   transition: height 0.25s ease-in-out;
+  z-index: 20;
 }
 
 .nav__form.change {
@@ -201,36 +272,26 @@ svg {
   z-index: 20;
 }
 
-@media only screen and (min-width: 775px) {
+@media only screen and (max-width: 520px) {
+  .nav__link {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (min-width: 430px) {
   .nav__links-container {
     height: auto !important;
   }
 }
 
-@media only screen and (max-width: 775px) {
-  .nav {
+@media only screen and (max-width: 430px) {
+  .nav__main {
+    background-color: transparent;
+  }
+  .nav__main-links {
     position: relative;
-    padding-top: 1.8rem;
-    padding-bottom: 1.8rem;
   }
-  .nav__links {
-    padding: 0;
-    margin-left: 0;
-    margin-right: 0;
-  }
-  .nav__links-container {
-    position: absolute;
-    left: 0;
-    top: 9.2rem;
-    width: 100%;
-    max-width: 100%;
-    height: 0;
-    overflow: hidden;
-    background-color: #e3e3ff;
-    display: block;
-    padding: 0;
-    margin-left: 0;
-    margin-right: 0;
+  .nav__main, .nav__auth {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -244,19 +305,26 @@ svg {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+  }
+  .nav__auth {
+    padding-bottom: 4rem;
+  }
+  .nav__links-container {
+    background-color: var(--blue-2);
+    background-color: #e3e3ff;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
     -webkit-transition: height 0.3s ease-in-out;
     transition: height 0.3s ease-in-out;
-    text-align: center;
-  }
-  .nav__links.show {
-    height: 100vh;
   }
   .nav__link {
-    display: block;
     margin-right: 0 !important;
     margin-left: 0 !important;
     margin-top: 2rem;
-    margin-bottom: 2rem;
     text-align: center;
     width: 100%;
   }
