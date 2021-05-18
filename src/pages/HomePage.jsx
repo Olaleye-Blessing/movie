@@ -1,6 +1,6 @@
 import React from "react";
 import LoadingIndicator from "../Components/LoadingIndicator";
-import Media from "../Components/Movie";
+import Media from "../Components/MediaBox";
 import { useGlobalContext } from "../contexts/GlobalContext";
 import useInfiniteScrolling from "../hooks/useInfiniteScrolling";
 // import { NavLink } from "react-router-dom";
