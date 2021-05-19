@@ -30,9 +30,9 @@ const useFetch = (url) => {
     };
 
     useEffect(() => {
-        setTimeout(() => {
-            fetchData();
-        }, 3000);
+        // setTimeout(() => {
+        fetchData();
+        // }, 3000);
         return () => abortControl.abort();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps

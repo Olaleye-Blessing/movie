@@ -23,7 +23,6 @@ const useInfiniteScrolling = (pathUrl) => {
 
         //? remove effect when component unmounts
         return () => {
-            console.log("remove scrolling function(unmount)...");
             window.removeEventListener("scroll", handleScroll);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -4,6 +4,7 @@ import { BiSearchAlt } from "react-icons/bi";
 
 import HomeLogoLink from "./HomeLogoLink";
 import { useGlobalContext } from "../contexts/GlobalContext";
+// import Slider from "./Slider";
 
 const Navbar = () => {
     let { setSearchQuery } = useGlobalContext();
@@ -124,6 +125,7 @@ const Navbar = () => {
                     </figure>
                 </button>
             </div>
+            {/* <Slider /> */}
             <form
                 className={`nav__form width`}
                 ref={searchCont}
