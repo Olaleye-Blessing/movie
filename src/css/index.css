@@ -979,7 +979,6 @@ section[data-sec="media"] {
   display: flex;
   white-space: nowrap;
   width: 4000px;
-  gap: 2rem;
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
@@ -988,6 +987,7 @@ section[data-sec="media"] {
   display: block;
   -webkit-transition: color 0.3s ease-in;
   transition: color 0.3s ease-in;
+  margin-right: 2rem;
 }
 
 .marquee__link:link {
