@@ -1,24 +1,25 @@
-// import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import Gallery from "../Components/Gallery";
-import LoadingIndicator from "../Components/LoadingIndicator";
-import { useGlobalContext } from "../contexts/GlobalContext";
+import Gallery from "./../Components/Gallery";
+import LoadingIndicator from "./../Components/LoadingIndicator";
+import { useGlobalContext } from "./../contexts/GlobalContext";
 import useFetch from "../hooks/useFetch";
 import notFound from "./../images/404.jpg";
+// import MediaProfile from "./MediaProfile";
 
-const Movie = () => {
+const Media = ({ type }) => {
     let { id } = useParams();
     let { key, baseUrl } = useGlobalContext();
 
-    let movieUrl = `${baseUrl}/movie/${id}?api_key=${key}&language=en-US`;
-    let {
-        data: movie,
-        error: errMovie,
-        isPending: loadingMovie,
-    } = useFetch(movieUrl);
+    let mediaUrl = `${baseUrl}/${type}/${id}?api_key=${key}&language=en-US`;
 
-    let creditUrl = `${baseUrl}/movie/${id}/credits?api_key=${key}&language=en-US`;
+    let {
+        data: media,
+        error: mediaErr,
+        isPending: mediaLoading,
+    } = useFetch(mediaUrl);
+
+    let creditUrl = `${baseUrl}/${type}/${id}/credits?api_key=${key}&language=en-US`;
 
     let {
         data: castsResult,
@@ -27,13 +28,12 @@ const Movie = () => {
     } = useFetch(creditUrl);
 
     let cast = castsResult?.cast;
-    console.log(cast);
 
     let w300 = `https://image.tmdb.org/t/p/w185/`;
     const handleDragStart = (e) => e.preventDefault();
     let items = cast?.map((c) => (
         <div className="gallery__item">
-            <Link to={`/person/${c.id}`} target="_blank">
+            <Link to={`/person/${c.id}`}>
                 <img
                     src={
                         c.profile_path ? `${w300}/${c.profile_path}` : notFound
@@ -47,11 +47,11 @@ const Movie = () => {
         </div>
     ));
 
-    if (loadingMovie) {
+    if (mediaLoading) {
         return <LoadingIndicator />;
     }
 
-    if (errMovie) {
+    if (mediaErr) {
         return <div>error...</div>;
     }
 
@@ -60,16 +60,18 @@ const Movie = () => {
             <section className="smedia">
                 <figure className="smedia__img">
                     <img
-                        src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-                        alt={movie.original_title}
+                        src={`https://image.tmdb.org/t/p/w300${media.poster_path}`}
+                        alt={media.original_title || media.original_name}
                     />
                 </figure>
                 <section className="smedia__detail">
                     <header className="smedia__title">
-                        <h2>{movie.original_title}</h2>
-                        <span>({movie.release_date})</span>
+                        <h2>{media.original_title || media.original_name}</h2>
+                        <span>
+                            ({media.release_date || media.first_air_date})
+                        </span>
                     </header>
-                    <p className="smedia__overview">{movie.overview}</p>
+                    <p className="smedia__overview">{media.overview}</p>
                     <div className="smedia__slider">
                         <Gallery items={items} />
                     </div>
@@ -83,9 +85,19 @@ const Movie = () => {
                     </div>
                 </section>
             </section>
+            {/* <MediaProfile media={media}>
+                <div className="smedia__slider">
+                    <Gallery items={items} />
+                </div>
+                <div className="smedia__trialer">
+                    <Link to="/" className="btn btn-link btn-border btn-extra">
+                        watch trialer
+                    </Link>
+                </div>
+            </MediaProfile> */}
             <section className="smedia__reviews">reviews</section>
         </main>
     );
 };
 
-export default Movie;
+export default Media;

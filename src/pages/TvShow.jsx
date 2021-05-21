@@ -1,4 +1,3 @@
-// import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import Gallery from "../Components/Gallery";
@@ -7,18 +6,20 @@ import { useGlobalContext } from "../contexts/GlobalContext";
 import useFetch from "../hooks/useFetch";
 import notFound from "./../images/404.jpg";
 
-const Movie = () => {
+const TvShow = () => {
     let { id } = useParams();
     let { key, baseUrl } = useGlobalContext();
 
-    let movieUrl = `${baseUrl}/movie/${id}?api_key=${key}&language=en-US`;
+    let tvUrl = `${baseUrl}/tv/${id}?api_key=${key}&language=en-US`;
     let {
-        data: movie,
-        error: errMovie,
-        isPending: loadingMovie,
-    } = useFetch(movieUrl);
+        data: tvshow,
+        error: errTvshow,
+        isPending: loadingTvShow,
+    } = useFetch(tvUrl);
 
-    let creditUrl = `${baseUrl}/movie/${id}/credits?api_key=${key}&language=en-US`;
+    console.log(tvshow);
+
+    let creditUrl = `${baseUrl}/tv/${id}/credits?api_key=${key}&language=en-US`;
 
     let {
         data: castsResult,
@@ -47,11 +48,11 @@ const Movie = () => {
         </div>
     ));
 
-    if (loadingMovie) {
+    if (loadingTvShow) {
         return <LoadingIndicator />;
     }
 
-    if (errMovie) {
+    if (errTvshow) {
         return <div>error...</div>;
     }
 
@@ -60,16 +61,16 @@ const Movie = () => {
             <section className="smedia">
                 <figure className="smedia__img">
                     <img
-                        src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-                        alt={movie.original_title}
+                        src={`https://image.tmdb.org/t/p/w300${tvshow.poster_path}`}
+                        alt={tvshow.original_name}
                     />
                 </figure>
                 <section className="smedia__detail">
                     <header className="smedia__title">
-                        <h2>{movie.original_title}</h2>
-                        <span>({movie.release_date})</span>
+                        <h2>{tvshow.original_name}</h2>
+                        <span>({tvshow.first_air_date})</span>
                     </header>
-                    <p className="smedia__overview">{movie.overview}</p>
+                    <p className="smedia__overview">{tvshow.overview}</p>
                     <div className="smedia__slider">
                         <Gallery items={items} />
                     </div>
@@ -88,4 +89,4 @@ const Movie = () => {
     );
 };
 
-export default Movie;
+export default TvShow;

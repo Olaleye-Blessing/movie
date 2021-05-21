@@ -1,4 +1,5 @@
 import React from "react";
+import { Switch, Route, useLocation } from "react-router-dom";
 // import ReactDOM from "react-dom";
 
 import Homepage from "./pages/HomePage";
@@ -8,13 +9,15 @@ import Navbar from "./Components/Navbar";
 
 import "./css/index.css";
 
-import { Switch, Route, useLocation } from "react-router-dom";
 import ResetPassword from "./pages/ResetPassword";
 import Movies from "./pages/Movies";
 import People from "./pages/People";
 import TvShows from "./pages/TvShows";
-import Movie from "./pages/Movie";
+// import Movie from "./pages/Movie";
 import MediaSearch from "./pages/MediaSearch";
+// import TvShow from "./pages/TvShow";
+import Person from "./pages/Person";
+import Media from "./Components/Media";
 
 const App = () => {
     let { pathname } = useLocation();
@@ -38,13 +41,19 @@ const App = () => {
                     <ResetPassword />
                 </Route>
                 <Route path="/movies/:id">
-                    <Movie />
+                    <Media type="movie" />
                 </Route>
                 <Route path="/movies">
                     <Movies />
                 </Route>
+                <Route path="/person/:id">
+                    <Person />
+                </Route>
                 <Route path="/people">
                     <People />
+                </Route>
+                <Route path="/tv/:id">
+                    <Media type="tv" />
                 </Route>
                 <Route path="/tvshows">
                     <TvShows />
