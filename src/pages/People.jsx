@@ -14,6 +14,7 @@ const People = () => {
     } = useInfiniteScrolling(
         `https://api.themoviedb.org/3/person/popular?api_key=${key}&language=en-US`
     );
+    console.log(error);
     return (
         <>
             <section className="width" data-sec="media">
@@ -35,7 +36,7 @@ const People = () => {
                     })}
             </section>
             {loading && <LoadingIndicator />}
-            {error && <div>{error.message || error}</div>}
+            {error && <div>{error}</div>}
         </>
     );
 };

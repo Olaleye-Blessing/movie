@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+// import { NetWork } from "./../utility/customErrors";
 
 const useFetch = (url) => {
     const [data, setData] = useState([]);
@@ -18,14 +19,25 @@ const useFetch = (url) => {
             setError(null);
             setIsPending(null);
         } catch (error) {
-            if (error.name === "AbortError") {
-            } else {
-                console.log(error.name);
-                console.log("normal error, could not fetch");
-                console.log({ message: error.message });
-                setError(error.name);
+            if (error.name !== "AbortError") {
                 setIsPending(null);
+                // console.log(error.name);
+                // console.log("normal error, could not fetch");
+                // console.log({ message: error.message });
+                if (error.name === "TypeError") {
+                    setError(
+                        "Network Issue! Pls check your network connection"
+                    );
+                }
             }
+            // if (error.name === "AbortError") {
+            // } else {
+            //     console.log(error.name);
+            //     console.log("normal error, could not fetch");
+            //     console.log({ message: error.message });
+            //     setError(error.name);
+            //     setIsPending(null);
+            // }
         }
     };
 

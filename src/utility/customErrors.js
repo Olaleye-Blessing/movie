@@ -11,4 +11,11 @@ class NotFound extends MyError {
     // }
 }
 
-export { NotFound };
+class NetWork extends MyError {
+    constructor(message) {
+        super(message);
+        this.message = "Network Issue! Pls check your network connection";
+    }
+}
+
+export { NotFound, NetWork };
