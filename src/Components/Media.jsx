@@ -5,10 +5,16 @@ import LoadingIndicator from "./../Components/LoadingIndicator";
 import { useGlobalContext } from "./../contexts/GlobalContext";
 import useFetch from "../hooks/useFetch";
 import notFound from "./../images/404.jpg";
+import { FaYoutube } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { fetchData } from "../utility/fetchData";
 // import MediaProfile from "./MediaProfile";
 
 const Media = ({ type }) => {
     let { id } = useParams();
+    const [trialer, setTrialer] = useState([]);
+    // https://api.themoviedb.org/3/movie/460465/videos?api_key=651ef57b1ca582995fef27ff08df6717&language=en-US
+    // console.log({ id });
     let { key, baseUrl } = useGlobalContext();
 
     let mediaUrl = `${baseUrl}/${type}/${id}?api_key=${key}&language=en-US`;
@@ -47,6 +53,22 @@ const Media = ({ type }) => {
         </div>
     ));
 
+    let trailerLink = `${baseUrl}/${type}/${id}/videos?api_key=${key}&language=en-US`;
+    useEffect(() => {
+        let abortFetch = new AbortController();
+        let signal = abortFetch.signal;
+        fetchData(trailerLink, signal).then((data) => {
+            if (data.status === "success") {
+                // console.log(data);
+                let result = data.data.results;
+                setTrialer(result?.[0]);
+            }
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    console.log({ trialer });
+
     if (mediaLoading) {
         return <LoadingIndicator />;
     }
@@ -54,6 +76,18 @@ const Media = ({ type }) => {
     if (mediaErr) {
         return <div>error...</div>;
     }
+
+    const galleryResponsiveness = {
+        0: {
+            items: 2,
+        },
+        512: {
+            items: 4,
+        },
+        1024: {
+            items: 6,
+        },
+    };
 
     return (
         <main className="width">
@@ -73,28 +107,26 @@ const Media = ({ type }) => {
                     </header>
                     <p className="smedia__overview">{media.overview}</p>
                     <div className="smedia__slider">
-                        <Gallery items={items} />
+                        <Gallery
+                            responsive={galleryResponsiveness}
+                            items={items}
+                            animationDuration="3000"
+                            autoPlayInterval="300"
+                        />
                     </div>
                     <div className="smedia__trialer">
-                        <Link
-                            to="/"
+                        <a
+                            href={`https://www.youtube.com/watch?v=${trialer.key}`}
                             className="btn btn-link btn-border btn-extra"
+                            target="_blank"
+                            rel="noreferrer"
                         >
+                            <FaYoutube />
                             watch trialer
-                        </Link>
+                        </a>
                     </div>
                 </section>
             </section>
-            {/* <MediaProfile media={media}>
-                <div className="smedia__slider">
-                    <Gallery items={items} />
-                </div>
-                <div className="smedia__trialer">
-                    <Link to="/" className="btn btn-link btn-border btn-extra">
-                        watch trialer
-                    </Link>
-                </div>
-            </MediaProfile> */}
             <section className="smedia__reviews">reviews</section>
         </main>
     );

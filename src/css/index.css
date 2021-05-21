@@ -1110,8 +1110,14 @@ section[data-sec="media"] {
 .smedia__trialer a {
   font-size: 2rem;
   width: 100%;
-  max-width: 15rem;
+  max-width: 20rem;
   padding: 1rem 1rem 1.2rem;
+}
+
+.smedia__trialer a svg {
+  vertical-align: -0.5rem;
+  color: red;
+  margin-right: 1rem;
 }
 
 .gallery__item {
