@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { checkScroll } from "../utility/checkScroll";
 import { fetchData } from "../utility/fetchData";
+import { NotFound } from "./../utility/customErrors";
 
 const useInfiniteScrolling = (pathUrl) => {
     const [data, setData] = useState([]);
@@ -45,22 +46,22 @@ const useInfiniteScrolling = (pathUrl) => {
         }
         fetchData(url, signal)
             .then((fetchedData) => {
-                if (fetchedData.status === "success") {
-                    let { data: result } = fetchedData;
-                    let { results, total_pages } = result;
-                    setData((old) => [...new Set([...old, ...results])]);
-                    setLoading(false);
-                    setTotalPages(total_pages);
-                }
-                if (fetchedData.status === "fail") {
-                    console.log("then fail ....");
-                    setLoading(false);
-                    setError(fetchedData.message);
-                }
+                let { results, total_pages } = fetchedData;
+                setData((old) => [...new Set([...old, ...results])]);
+                setLoading(false);
+                setTotalPages(total_pages);
+                // setError(null);
             })
             .catch((err) => {
                 console.log("catching error in catch");
                 console.log(err);
+                if (err.name !== "AbortError") {
+                    setLoading(false);
+                    // setError(error.mess)
+                    if (err instanceof NotFound) {
+                        setError(err.message);
+                    }
+                }
             });
 
         // eslint-disable-next-line react-hooks/exhaustive-deps

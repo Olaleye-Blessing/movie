@@ -29,7 +29,7 @@ const Media = ({ type }) => {
 
     let {
         data: castsResult,
-        // isPending: castPending,
+        isPending: castPending,
         // error: castError,
     } = useFetch(creditUrl);
 
@@ -58,16 +58,13 @@ const Media = ({ type }) => {
         let abortFetch = new AbortController();
         let signal = abortFetch.signal;
         fetchData(trailerLink, signal).then((data) => {
-            if (data.status === "success") {
-                // console.log(data);
-                let result = data.data.results;
-                setTrialer(result?.[0]);
-            }
+            let result = data.results;
+            setTrialer(result?.[0]);
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log({ trialer });
+    // console.log({ trialer });
 
     if (mediaLoading) {
         return <LoadingIndicator />;
@@ -107,12 +104,15 @@ const Media = ({ type }) => {
                     </header>
                     <p className="smedia__overview">{media.overview}</p>
                     <div className="smedia__slider">
-                        <Gallery
-                            responsive={galleryResponsiveness}
-                            items={items}
-                            animationDuration="3000"
-                            autoPlayInterval="300"
-                        />
+                        {castPending && <LoadingIndicator />}
+                        {!castPending && (
+                            <Gallery
+                                responsive={galleryResponsiveness}
+                                items={items}
+                                animationDuration="3000"
+                                autoPlayInterval="300"
+                            />
+                        )}
                     </div>
                     <div className="smedia__trialer">
                         <a

@@ -1,6 +1,5 @@
 import React from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
-// import ReactDOM from "react-dom";
 
 import Homepage from "./pages/HomePage";
 import SignUp from "./pages/Signup";
@@ -13,9 +12,7 @@ import ResetPassword from "./pages/ResetPassword";
 import Movies from "./pages/Movies";
 import People from "./pages/People";
 import TvShows from "./pages/TvShows";
-// import Movie from "./pages/Movie";
 import MediaSearch from "./pages/MediaSearch";
-// import TvShow from "./pages/TvShow";
 import Person from "./pages/Person";
 import Media from "./Components/Media";
 

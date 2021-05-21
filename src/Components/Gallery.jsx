@@ -13,12 +13,12 @@ const Gallery = ({
             infinite
             disableDotsControls
             disableButtonsControls
-            animationDuration={animationDuration}
+            // animationDuration={animationDuration}
             responsive={responsive}
             items={items}
             autoPlay
-            animationEasingFunction="linear"
-            autoPlayInterval={autoPlayInterval}
+            // animationEasingFunction="linear"
+            // autoPlayInterval={autoPlayInterval}
         />
     );
 };
