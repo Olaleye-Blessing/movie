@@ -53,8 +53,8 @@ const useInfiniteScrolling = (pathUrl) => {
                 // setError(null);
             })
             .catch((err) => {
-                console.log("catching error in catch");
-                console.log(err);
+                // console.log("catching error in catch");
+                // console.log(err);
                 if (err.name !== "AbortError") {
                     setLoading(false);
                     // setError(error.mess)

@@ -36,7 +36,6 @@ const Navbar = () => {
     };
 
     const toggleFormCont = () => {
-        console.log("yes");
         searchCont.current.classList.toggle("change");
         searchRef.current.focus();
         // setShowSearch(!showSearch);
