@@ -14,7 +14,7 @@ const People = () => {
     } = useInfiniteScrolling(
         `https://api.themoviedb.org/3/person/popular?api_key=${key}&language=en-US`
     );
-    console.log(error);
+    // console.log(error);
     return (
         <>
             <section className="width" data-sec="media">

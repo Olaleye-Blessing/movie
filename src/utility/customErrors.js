@@ -5,17 +5,8 @@ class MyError extends Error {
     }
 }
 
-class NotFound extends MyError {
-    // constructor(message) {
-    //     super("Resource Not found");
-    // }
-}
+class NotFound extends MyError {}
 
-class NetWork extends MyError {
-    constructor(message) {
-        super(message);
-        this.message = "Network Issue! Pls check your network connection";
-    }
-}
+class NetWork extends MyError {}
 
 export { NotFound, NetWork };

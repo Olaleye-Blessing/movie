@@ -3,21 +3,10 @@ import Media from "../Components/MediaBox";
 import { useGlobalContext } from "../contexts/GlobalContext";
 import useInfiniteScrolling from "../hooks/useInfiniteScrolling";
 
-// https://api.themoviedb.org/3/search/multi?api_key=651ef57b1ca582995fef27ff08df6717&language=en-US&query=Nikita&page=1&include_adult=true
-// fetch(pathUrl)
-//     .then((res) => {
-//         if (!res.ok) throw new Error("not found");
-//         return res.json();
-//     })
-//     .then((data) => console.log(data))
-//     .catch((err) => {
-//         console.log(err);
-//     });
 const MediaSearch = () => {
     let { searchQuery, key } = useGlobalContext();
 
     let pathUrl = `https://api.themoviedb.org/3/search/multi?api_key=${key}&language=en-US&query=${searchQuery}&include_adult=true`;
-    // console.log(searchQuery === "");
 
     let { data: allMedia, loading, error } = useInfiniteScrolling(pathUrl);
 

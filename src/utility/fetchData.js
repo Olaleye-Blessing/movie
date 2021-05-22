@@ -1,3 +1,5 @@
+import { NetWork } from "./customErrors";
+
 //? I dont know why I pass in signal here but it works. DON't TOUCH!!
 const fetchData = async (url, signal) => {
     try {
@@ -7,11 +9,10 @@ const fetchData = async (url, signal) => {
         return data;
         // return { status: "success", data };
     } catch (error) {
+        if (error.name === "TypeError") {
+            throw new NetWork("Network issue! Check your internet connection");
+        }
         throw error;
-        // if (error.name !== "AbortError") {
-        //     throw error;
-        // }
-        // return { status: "fail", message: error.message, name: error.name };
     }
 };
 

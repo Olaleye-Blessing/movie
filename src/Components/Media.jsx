@@ -13,8 +13,7 @@ import { fetchData } from "../utility/fetchData";
 const Media = ({ type }) => {
     let { id } = useParams();
     const [trialer, setTrialer] = useState([]);
-    // https://api.themoviedb.org/3/movie/460465/videos?api_key=651ef57b1ca582995fef27ff08df6717&language=en-US
-    // console.log({ id });
+
     let { key, baseUrl } = useGlobalContext();
 
     let mediaUrl = `${baseUrl}/${type}/${id}?api_key=${key}&language=en-US`;
@@ -127,7 +126,6 @@ const Media = ({ type }) => {
                     </div>
                 </section>
             </section>
-            <section className="smedia__reviews">reviews</section>
         </main>
     );
 };

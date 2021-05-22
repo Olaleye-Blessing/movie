@@ -4,7 +4,6 @@ import { BiSearchAlt } from "react-icons/bi";
 
 import HomeLogoLink from "./HomeLogoLink";
 import { useGlobalContext } from "../contexts/GlobalContext";
-// import Slider from "./Slider";
 
 const Navbar = () => {
     let { setSearchQuery } = useGlobalContext();
@@ -55,6 +54,7 @@ const Navbar = () => {
     if (pathname !== "/search") {
         if (searchCont.current != null) {
             searchCont.current.classList.remove("change");
+            searchRef.current.value = "";
         }
     }
 
@@ -68,7 +68,7 @@ const Navbar = () => {
 
     const handleSearchChange = (e) => {
         if (pathname !== "/search") {
-            console.log("yes");
+            // console.log("yes");
             history.push("/search");
         }
         let { value } = e.target;
@@ -124,7 +124,6 @@ const Navbar = () => {
                     </figure>
                 </button>
             </div>
-            {/* <Slider /> */}
             <form
                 className={`nav__form width`}
                 ref={searchCont}

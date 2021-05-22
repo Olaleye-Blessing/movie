@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { checkScroll } from "../utility/checkScroll";
 import { fetchData } from "../utility/fetchData";
-import { NotFound } from "./../utility/customErrors";
+import { NetWork } from "./../utility/customErrors";
 
 const useInfiniteScrolling = (pathUrl) => {
     const [data, setData] = useState([]);
@@ -34,11 +34,12 @@ const useInfiniteScrolling = (pathUrl) => {
     useEffect(() => {
         setLoading(true);
         setError(false);
-        if (totalPages === 0) {
-            setLoading(false);
-            setError("not found");
-            return;
-        }
+        // if (totalPages === 0) {
+        //     setLoading(false);
+        //     setError("not found");
+        //     return;
+        // }
+        // setTotalPages(1);
         if (page > totalPages) {
             setLoading(false);
             setError("no more data");
@@ -50,15 +51,20 @@ const useInfiniteScrolling = (pathUrl) => {
                 setData((old) => [...new Set([...old, ...results])]);
                 setLoading(false);
                 setTotalPages(total_pages);
+
+                //? you need to set the total no of pages back to 1 since there is a return statement(up there) that returns "no more data"
+                if (total_pages === 0) {
+                    setError("not found");
+                    setTotalPages(1);
+                }
                 // setError(null);
             })
             .catch((err) => {
-                // console.log("catching error in catch");
-                // console.log(err);
+                console.log(err);
                 if (err.name !== "AbortError") {
                     setLoading(false);
                     // setError(error.mess)
-                    if (err instanceof NotFound) {
+                    if (err instanceof NetWork) {
                         setError(err.message);
                     }
                 }
