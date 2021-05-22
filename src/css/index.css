@@ -1337,7 +1337,7 @@ section[data-sec="media"] {
   margin-right: 2rem;
 }
 
-.marquee__link:link {
+.marquee__link:link, .marquee__link:visited {
   color: var(--coral-1);
   color: #fff;
 }
