@@ -36,7 +36,7 @@ const Person = () => {
                 <section className="smedia__detail">
                     <header className="smedia__title">
                         <h2>{person.name}</h2>
-                        <span>({person.birthday})</span>
+                        {person.birthday && <span>({person.birthday})</span>}
                         <span>({person.deathday || "alive"})</span>
                     </header>
                     <p className="smedia__overview">{person.biography}</p>
