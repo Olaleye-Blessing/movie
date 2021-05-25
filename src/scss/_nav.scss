@@ -16,6 +16,10 @@
         // background-color: green;
 
         padding-left: 4rem;
+        a.active {
+            background-color: var(--coral-1);
+            color: var(--white);
+        }
     }
 
     &__link {
@@ -81,14 +85,14 @@
                 @include flex(column, center);
                 transition: height 0.3s ease-in-out;
                 text-align: center;
+                &.show {
+                    height: 100vh;
+                    justify-content: flex-start;
+                }
             }
             padding: 0;
             margin-left: 0;
             margin-right: 0;
-
-            &.show {
-                height: 100vh;
-            }
         }
 
         &__link {

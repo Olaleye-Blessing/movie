@@ -411,6 +411,11 @@ svg {
   z-index: 4;
 }
 
+.nav__links a.active {
+  background-color: var(--coral-1);
+  color: var(--white);
+}
+
 .nav__link {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
@@ -485,8 +490,11 @@ svg {
     transition: height 0.3s ease-in-out;
     text-align: center;
   }
-  .nav__links.show {
+  .nav__links-container.show {
     height: 100vh;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
   }
   .nav__link {
     display: block;

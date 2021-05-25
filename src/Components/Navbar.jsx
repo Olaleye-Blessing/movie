@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { BiSearchAlt } from "react-icons/bi";
 
@@ -12,11 +12,11 @@ const Navbar = () => {
     let pathname = history.location.pathname;
 
     let navItems = [
-        { path: "/movies", label: "movies", active: false },
-        { path: "/tvshows", label: "tvshows", active: false },
-        { path: "/people", label: "people", active: false },
-        { path: "/login", label: "login", active: false },
-        { path: "/signup", label: "signup", active: false },
+        { path: "/movies" },
+        { path: "/tvshows" },
+        { path: "/people" },
+        { path: "/login" },
+        { path: "/signup" },
     ];
 
     const navLinksRef = useRef(null);
@@ -27,28 +27,19 @@ const Navbar = () => {
 
     const searchRef = useRef(null);
     const searchCont = useRef(null);
-    // const [showSearch, setShowSearch] = useState(false);
 
     const toggleNav = () => {
         navToggleRef.current.classList.toggle("change");
+        navLinksContRef.current.classList.toggle("show");
         setShowLinks(!showLinks);
     };
 
     const toggleFormCont = () => {
         searchCont.current.classList.toggle("change");
         searchRef.current.focus();
-        // setShowSearch(!showSearch);
+        navLinksContRef.current.classList.remove("show");
+        navToggleRef.current.classList.remove("change");
     };
-
-    useEffect(() => {
-        let linksHeight = navLinksRef.current.getBoundingClientRect().height;
-
-        if (showLinks) {
-            navLinksContRef.current.style.height = `${linksHeight}px`;
-        } else {
-            navLinksContRef.current.style.height = `0px`;
-        }
-    }, [showLinks]);
 
     //? remove search form when leaving search page for other pages
     if (pathname !== "/search") {
@@ -61,19 +52,23 @@ const Navbar = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (pathname !== "/search") {
-            console.log("yes");
             history.push("/search");
         }
     };
 
     const handleSearchChange = (e) => {
         if (pathname !== "/search") {
-            // console.log("yes");
             history.push("/search");
         }
         let { value } = e.target;
         setSearchQuery(value);
     };
+
+    //? remove navbar and search form each time path changes
+    useEffect(() => {
+        navLinksContRef.current.classList.remove("show");
+        navToggleRef.current.classList.remove("change");
+    }, [pathname]);
 
     return (
         <nav>
@@ -81,8 +76,8 @@ const Navbar = () => {
                 <HomeLogoLink />
                 <div ref={navLinksContRef} className="nav__links-container">
                     <ul ref={navLinksRef} className="nav__links">
-                        {navItems.map((item, i) => {
-                            let { path, label } = item;
+                        {navItems.map((item) => {
+                            let { path } = item;
                             return (
                                 <li
                                     className={`nav__link ${
@@ -95,9 +90,9 @@ const Navbar = () => {
                                         className={`btn btn-link ${
                                             path === "/signup" &&
                                             "btn-border btn-extra"
-                                        }`}
+                                        } ${pathname === path ? "active" : ""}`}
                                     >
-                                        {label}
+                                        {path.slice(1)}
                                     </NavLink>
                                 </li>
                             );
