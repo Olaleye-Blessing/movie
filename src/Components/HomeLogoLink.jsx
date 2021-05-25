@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 const HomeLogoLink = () => {
     return (
         <Link to="/" className="homeLogo">
-            <span>WAH</span>
-            <span>ALA</span>
+            WAHALA
             <figure className="homeLogo__svg">
                 <FaDove />
             </figure>
